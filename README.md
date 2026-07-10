@@ -1,4 +1,4 @@
-# GoogLeNet-22 + Squeeze-and-Excitation — 3-Class Image Classifier (from scratch)
+# GoogLeNet-22 + Squeeze-and-Excitation 3-Class Image Classifier (from scratch)
 
 A custom **GoogLeNet-22 (BN-Inception)** convolutional network with **Squeeze-and-Excitation (SE) attention**, trained **entirely from scratch** (no ImageNet pretrained weights) to classify texture-based images into **3 classes**. The pipeline is deliberately built to survive **colour-shifted / noisy test images** through an aggressive colour + noise augmentation strategy.
 
@@ -105,7 +105,7 @@ Full details and ablations are in `02_GoogLeNET_SE_fromScratch.pdf`.
 Requires **Python 3.11+** and a CUDA-capable GPU (CPU works but is slow). The frozen environment (`util3.txt`) uses PyTorch 2.12 + CUDA 12.6.
 
 ```bash
-# clone your repo first, then:
+# clone
 python -m venv .venv
 # Windows:  .venv\Scripts\activate
 # macOS/Linux:  source .venv/bin/activate
