@@ -115,7 +115,7 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126
 pip install numpy pandas pillow scikit-learn matplotlib seaborn
 ```
 
-> `util3.txt` is a `pip freeze` with conda `@ file://` paths — it documents the exact versions but is not directly installable. Use the command above (or pin versions from `util3.txt` if you want an exact match).
+> `util3.txt` is a `pip freeze` with conda `@ file://` paths
 
 ---
 
@@ -135,7 +135,7 @@ python testrun3.py       # (4) predict the 300 test images -> clsn3_ans.csv
 
 ---
 
-## Outputs you'll get
+## Outputs
 
 - **`outputs/train_split.csv` / `val_split.csv`** — reproducible 1,264 / 316 stratified split (seed 42).
 - **`outputs/train_stats.json`** — leak-safe normalisation stats.
@@ -151,7 +151,3 @@ python testrun3.py       # (4) predict the 300 test images -> clsn3_ans.csv
 `seed_everything(42)` locks Python / NumPy / PyTorch RNGs and sets cuDNN deterministic mode. The train/val split is persisted as CSV so any re-run produces identical partitions.
 
 ---
-
-## License
-
-Add a license of your choice (e.g. MIT) as a `LICENSE` file if you intend to share this publicly.
