@@ -2,7 +2,6 @@
 
 A custom **GoogLeNet-22 (BN-Inception)** convolutional network with **Squeeze-and-Excitation (SE) attention**, trained **entirely from scratch** (no ImageNet pretrained weights) to classify texture-based images into **3 classes**. The pipeline is deliberately built to survive **colour-shifted / noisy test images** through an aggressive colour + noise augmentation strategy.
 
-> Author: Minh-Phuong Luong
 > Task: design → train → evaluate → predict a 3-class classifier on the `vir_data_exam` dataset (1,580 labelled train images + 300 unlabelled test images).
 
 ---
