@@ -1,0 +1,30 @@
+[
+  {
+    "tag": "SE",
+    "use_se": true,
+    "best_val_acc": 96.83544303797468,
+    "params": 10794313,
+    "best_epoch": 49,
+    "train_time_s": 5537.222585439682,
+    "val_acc": 96.83544303797468,
+    "f1_macro": 0.9600331061932295,
+    "latency_ms": 28.848657608032227,
+    "fps": 34.663657962427116,
+    "peak_vram_mb": 67.791872,
+    "model_size_mb": 43.177252
+  },
+  {
+    "tag": "noSE",
+    "use_se": false,
+    "best_val_acc": 95.56962025316456,
+    "params": 10320041,
+    "best_epoch": 46,
+    "train_time_s": 5103.142420291901,
+    "val_acc": 95.56962025316456,
+    "f1_macro": 0.952437745924395,
+    "latency_ms": 20.705032348632812,
+    "fps": 48.297437220185344,
+    "peak_vram_mb": 109.832192,
+    "model_size_mb": 41.280164
+  }
+]
