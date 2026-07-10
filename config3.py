@@ -20,8 +20,8 @@ def seed_everything(seed: int = SEED):
     os.environ["PYTHONHASHSEED"] = str(seed)
 
 # ─── Paths (Ex3!) ─────────────────────────────────────────────────────────────
-BASE_DIR    = Path(r"C:\Users\sammy\Exam3Ex3")
-DATA_DIR    = BASE_DIR / "vir_data_exam"
+BASE_DIR    = Path(r"datapath")
+DATA_DIR    = BASE_DIR / "vir_data"
 TRAIN_DIR   = DATA_DIR / "train"
 TEST_DIR    = DATA_DIR / "test1_vir"
 OUTPUT_DIR  = BASE_DIR / "outputs"
