@@ -60,7 +60,7 @@ SE attention adds ~474 K parameters (~4.6 %) and lifts validation accuracy by **
 └── 02_GoogLeNET_SE_fromScratch.pdf   # Full written report
 ```
 
-> **Note on paths:** the exact filenames above (e.g. `cm_val_SE.png`) currently sit at the top level of this folder. When you commit, you can either keep them flat or move the CSV/JSON/PNG artifacts into an `outputs/` (and `outputs/figures/`) directory to match `config3.py`. The README describes the intended layout.
+
 
 ---
 
