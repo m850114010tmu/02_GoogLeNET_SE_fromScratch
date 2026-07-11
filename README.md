@@ -1,6 +1,6 @@
-# GoogLeNet-22 + Squeeze-and-Excitation 3-Class Image Classifier (from scratch)
+# GoogLeNet-22 + Squeeze-and-Excitation 3-class image classifier
 
-A custom **GoogLeNet-22 (BN-Inception)** convolutional network with **Squeeze-and-Excitation (SE) attention**, trained **entirely from scratch** (no ImageNet pretrained weights) to classify texture-based images into **3 classes**. The pipeline is deliberately built to survive **colour-shifted / noisy test images** through an aggressive colour + noise augmentation strategy.
+A custom **GoogLeNet-22 (BN-Inception)** convolutional network with **Squeeze-and-Excitation (SE) attention**, trained entirely from scratch (no ImageNet pretrained weights) to classify texture-based images into **3 classes**. The pipeline is deliberately built to survive **colour-shifted / noisy test images** through an aggressive colour + noise augmentation strategy.
 
 > Task: design → train → evaluate → predict a 3-class classifier on the `vir_data_exam` dataset (1,580 labelled train images + 300 unlabelled test images).
 
@@ -86,13 +86,13 @@ The raw `vir_data_exam/` folder (train images + `test1_vir/` test images) is **n
 
 ## Method summary
 
-**Backbone** — GoogLeNet-22 (BN-Inception): stem → 9 inception modules in 3 depth stages → global average pooling → dropout(0.4) → 3-class linear head. Batch norm after every conv; Kaiming/He init for convs.
+**Backbone** GoogLeNet-22 (BN-Inception): stem → 9 inception modules in 3 depth stages → global average pooling → dropout(0.4) → 3-class linear head. Batch norm after every conv; Kaiming/He init for convs.
 
-**SE attention** — one SE block after every inception concatenation: squeeze (global avg pool → C-vector) → excitation (FC → ReLU → FC → sigmoid, reduction ratio 16) → per-channel rescaling. A single `use_se` flag toggles the SE / no-SE variants for the ablation.
+**SE attention** one SE block after every inception concatenation: squeeze (global avg pool → C-vector) → excitation (FC → ReLU → FC → sigmoid, reduction ratio 16) → per-channel rescaling. A single `use_se` flag toggles the SE / no-SE variants for the ablation.
 
-**Auxiliary classifiers** — two aux heads (from Inception 4a and 4d) during training, each weighted 0.3, for deep-network gradient signal.
+**Auxiliary classifiers** two aux heads (from Inception 4a and 4d) during training, each weighted 0.3, for deep-network gradient signal.
 
-**Augmentation (train only)** — RGBA→RGB, RandomResizedCrop(224, scale 0.7–1.0), horizontal flip, ±15° rotation, ColorJitter(0.3, 0.3, 0.3, 0.10), **RandomChannelScale(±0.15)** (per-channel RGB gain — the key colour-robustness transform), Normalize(train μ/σ), Gaussian noise (σ=0.04), RandomErasing(p=0.25). Val/test transforms are clean (resize + centre crop + normalise only).
+**Augmentation (train only)** RGBA→RGB, RandomResizedCrop(224, scale 0.7–1.0), horizontal flip, ±15° rotation, ColorJitter(0.3, 0.3, 0.3, 0.10), **RandomChannelScale(±0.15)** (per-channel RGB gain — the key colour-robustness transform), Normalize(train μ/σ), Gaussian noise (σ=0.04), RandomErasing(p=0.25). Val/test transforms are clean (resize + centre crop + normalise only).
 
 **Training** — AdamW, lr 3e-4, weight decay 1e-4, batch size 32, 60 epochs (max), 5-epoch linear warmup + cosine annealing, label smoothing 0.1, early stopping patience 12, mixed precision (AMP), seed 42.
 
@@ -121,8 +121,6 @@ pip install numpy pandas pillow scikit-learn matplotlib seaborn
 
 ## How to run
 
-Order comes from `pipeline.md`:
-
 ```bash
 python data_setup3.py    # (1) build stratified split + compute train stats
 python trainex3.py       # (2) train SE + noSE, save report3.pth, history, comparison
@@ -137,12 +135,12 @@ python testrun3.py       # (4) predict the 300 test images -> clsn3_ans.csv
 
 ## Outputs
 
-- **`outputs/train_split.csv` / `val_split.csv`** — reproducible 1,264 / 316 stratified split (seed 42).
-- **`outputs/train_stats.json`** — leak-safe normalisation stats.
-- **`outputs/training_history.csv`** — 60 epochs of loss/accuracy/lr/time.
-- **`outputs/se_comparison.json`** — SE vs no-SE metrics.
-- **`clsn3_ans.csv`** — final predictions: columns `filename, prediction` (e.g. `image_001, class 1`).
-- **`outputs/figures/*.png`** — confusion matrices, ROC curves, per-class metrics, learning curves, Grad-CAM, saliency maps, feature maps, and a class comparison grid.
+- **`outputs/train_split.csv` / `val_split.csv`** reproducible 1,264 / 316 stratified split (seed 42).
+- **`outputs/train_stats.json`** leak-safe normalisation stats.
+- **`outputs/training_history.csv`**60 epochs of loss/accuracy/lr/time.
+- **`outputs/se_comparison.json`** SE vs no-SE metrics.
+- **`clsn3_ans.csv`** final predictions: columns `filename, prediction` (e.g. `image_001, class 1`).
+- **`outputs/figures/*.png`** confusion matrices, ROC curves, per-class metrics, learning curves, Grad-CAM, saliency maps, feature maps, and a class comparison grid.
 
 ---
 
